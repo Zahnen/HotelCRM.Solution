@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Guest;
+
+<h1>Edit</h1>
+
+<h3>Edit this guest profile: @Html.DisplayFor(model => model.Name)</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.GuestId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.EditorFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Phone)
+  @Html.EditorFor(model => model.Phone)
+
+  @Html.LabelFor(model => model.Email)
+  @Html.EditorFor(model => model.Email)
+
+  @Html.LabelFor(model => model.Hometown)
+  @Html.EditorFor(model => model.Hometown)
+
+  @Html.LabelFor(model => model.LifetimeNights)
+  @Html.EditorFor(model => model.LifetimeNights)
+
+  @Html.LabelFor(model => model.VIPTier)
+  @Html.EditorFor(model => model.VIPTier)
+
+  <input type="submit" value="Save" />
+}

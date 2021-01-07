@@ -37,10 +37,7 @@ namespace HotelCRM.Controllers
 
     public ActionResult Details(int id)
     {
-      Property thisProperty = _db.Properties
-        .Include(Property => Property.Guests)
-        .ThenInclude(join => join.Guest)
-        .FirstOrDefault(Property => Property.PropertyId == id);
+      var thisProperty = _db.Properties.FirstOrDefault(property => property.PropertyId == id);
       return View(thisProperty);
     }
 

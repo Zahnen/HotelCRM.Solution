@@ -9,7 +9,6 @@
 <h3>Room Type: @Html.DisplayFor(model => model.RoomType)</h3>
 <h3>Maximum Number of Guests: @Html.DisplayFor(model => model.MaxOccupancy)</h3>
 
-
 @if(@Model.Guests.Count == 0)
 {
   <p>No guests have stayed in this room</p>
@@ -24,3 +23,16 @@ else
   }
   </ul>
 }
+
+<nav class="navbar navbar-light">  
+  <div class="container-fluid" id = "nav-background">  
+    <ul class="nav navbar-nav">
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><li>@Html.ActionLink("Edit Room", "Edit", new { id = Model.RoomId })</li>  
+      </button>
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span><li>@Html.ActionLink("Delete Room", "Delete", new { id = Model.RoomId })</li>  
+      </button>
+    </ul>  
+  </div>  
+</nav>

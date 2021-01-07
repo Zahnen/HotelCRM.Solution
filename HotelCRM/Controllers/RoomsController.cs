@@ -24,6 +24,7 @@ namespace HotelCRM.Controllers
     public ActionResult Create()
     {
       ViewBag.GuestId = new SelectList(_db.Guests, "GuestId", "Name");
+      ViewBag.PropertyId = new SelectList(_db.Properties, "PropertyId", "Name");
       return View();
     }
 
@@ -41,6 +42,12 @@ namespace HotelCRM.Controllers
 
     public ActionResult Details(int id)
     {
+      // var room = _db.Rooms.id;
+      // ViewBag.Property = new SelectList(_db.Properties.propertyId.Name, "PropertyId", "Name");
+
+      // var thisRoom = _db.Rooms.FirstOrDefault(room => room.RoomId == id);
+      // var thisProperty = _db.Properties.FirstOrDefault(property => property.PropertyId == thisRoom.PropertyId);
+      // var propertyName = thisProperty.Name;
       var thisRoom = _db.Rooms
         .Include(room => room.Guests)
         .ThenInclude(join => join.Guest)
@@ -51,6 +58,7 @@ namespace HotelCRM.Controllers
     public ActionResult Edit (int id)
     {
       var thisRoom = _db.Rooms.FirstOrDefault(rooms => rooms.RoomId == id);
+      ViewBag.PropertyId = new SelectList(_db.Properties, "PropertyId", "Name");
       ViewBag.GuestId = new SelectList(_db.Guests, "GuestId", "Name");
       return View(thisRoom);
     }

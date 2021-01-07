@@ -27,3 +27,19 @@ else
   }
   </ul>
 }
+
+<nav class="navbar navbar-light">  
+  <div class="container-fluid" id = "nav-background">  
+    <ul class="nav navbar-nav">
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><li>@Html.ActionLink("Edit Guest", "Edit", new { id = Model.GuestId })</li>  
+      </button>
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span><li>@Html.ActionLink("Delete Guest", "Delete", new { id = Model.GuestId })</li>  
+      </button>
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><li>@Html.ActionLink("Add a room to stay", "AddRoom", new { id = Model.GuestId })</li>  
+      </button>    
+    </ul>  
+  </div>  
+</nav>

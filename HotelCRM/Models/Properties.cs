@@ -6,15 +6,13 @@ namespace HotelCRM.Models
   {
     public Property()
     {
-      this.Guests = new HashSet<GuestProperty>();
+      this.Rooms = new HashSet<Room>();
     }
-
     public int PropertyId { get; set; }
     public string Name { get; set; }
     public int Stars { get; set; }
-    public int Age { get; set; }
-    public string Neighborhood { get; set; }
-
-    public ICollection<GuestProperty> Guests { get; set; }
+    public int YearBuilt { get; set; }
+    public string City { get; set; }
+    public ICollection<Room> Rooms { get; set; }
   }
 }

@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Property
+
+<h2>Confirm deletion of this property?</h2>
+
+@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete"/>
+}

@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Room
+
+<h2>Edit</h2>
+
+<h4>Edit this Room: @Html.DisplayFor(model => model.RoomNumber)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PropertyId)
+
+    @Html.Label("Room Number: ")
+    @Html.TextBoxFor(model => model.RoomNumber)
+
+    @Html.Label("Room Type: ")
+    @Html.TextBoxFor(model => model.RoomType)
+
+    @Html.Label("Maximum Occupancy: ")
+    @Html.TextBoxFor(model => model.MaxOccupancy)
+
+    @Html.LabelFor(model => model.Property)
+    @Html.DropDownList("PropertyId")
+
+    <input type="submit" value="Save" />
+}

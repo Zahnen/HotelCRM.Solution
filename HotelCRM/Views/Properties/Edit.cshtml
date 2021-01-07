@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Property
+
+<h2>Edit</h2>
+
+<h4>Edit this Property: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PropertyId)
+
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Stars)
+  @Html.TextBoxFor(model => model.Stars)
+
+  @Html.LabelFor(model => model.YearBuilt)
+  @Html.TextBoxFor(model => model.YearBuilt)
+
+  @Html.LabelFor(model => model.City)
+  @Html.TextBoxFor(model => model.City)
+
+    <input type="submit" value="Save" />
+}
