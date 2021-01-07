@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Room
+
+<h1>Add a new room</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Label("Room Number: ")
+    @Html.TextBoxFor(model => model.RoomNumber)
+
+    @Html.Label("Room Type: ")
+    @Html.TextBoxFor(model => model.RoomType)
+
+    @Html.Label("Maximum Occupancy: ")
+    @Html.TextBoxFor(model => model.MaxOccupancy)
+
+    <input type="submit" value="Add Room" class="btn btn-default" />
+}
+
+    @*<!-- @Html.Label("Select category")
+    @Html.DropDownList("CategoryId") -->*@

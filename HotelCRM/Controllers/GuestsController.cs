@@ -43,15 +43,15 @@ namespace HotelCRM.Controllers
     {
       Guest thisGuest = _db.Guests
         .Include(Guest => Guest.Rooms)
-        .THenInclude(join => join.Room)
+        .ThenInclude(join => join.Room)
         .FirstOrDefault(Guest => Guest.GuestId == id);
       return View(thisGuest);
     }
 
     public ActionResult Edit(int id)
     {
-      var thisGuest = _db.Guests.FirstOrDefault(Guests => Guests.GuestId == id)
-      viewBag.RoomId = new SelectList(_db.Rooms, "RoomId", "Name");
+      var thisGuest = _db.Guests.FirstOrDefault(Guests => Guests.GuestId == id);
+      ViewBag.RoomId = new SelectList(_db.Rooms, "RoomId", "Name");
       return View(thisGuest);
     }
 

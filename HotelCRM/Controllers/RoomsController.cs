@@ -33,7 +33,7 @@ namespace HotelCRM.Controllers
       _db.Rooms.Add(room);
       if (GuestId != 0)
       {
-        _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId })
+        _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -42,8 +42,8 @@ namespace HotelCRM.Controllers
     public ActionResult Details(int id)
     {
       var thisRoom = _db.Rooms
-        .Include(room => room.Guests);
-        .ThenInclude(join => join.Guests);
+        .Include(room => room.Guests)
+        .ThenInclude(join => join.Guest)
         .FirstOrDefault(room => room.RoomId == id);
       return View(thisRoom);
     }
@@ -60,7 +60,7 @@ namespace HotelCRM.Controllers
     {
       if (GuestId != 0)
       {
-        _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId })
+        _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId });
       }
       _db.Entry(room).State = EntityState.Modified;
       _db.SaveChanges();
@@ -70,7 +70,7 @@ namespace HotelCRM.Controllers
     public ActionResult Delete(int id)
     {
       var thisRoom = _db.Rooms.FirstOrDefault(rooms => rooms.RoomId == id);
-      return View(thisroom);
+      return View(thisRoom);
     }
 
     [HttpPost, ActionName("Delete")]

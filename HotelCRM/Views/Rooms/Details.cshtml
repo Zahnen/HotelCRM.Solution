@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Room
+
+<h1>Room Details:</h1>
+<h3>Room @Html.DisplayFor(model => model.RoomNumber)</h3>
+
+@if(@Model.Guests.Count == 0)
+{
+  <p>No guests have stayed in this room</p>
+}
+else
+{
+  <h3>Guests who have stayed in this room:</h3>
+  <ul>
+  @foreach(var join in Model.Guests)
+  {
+    <li>@join.Guest.Name</li>
+  }
+  </ul>
+}
