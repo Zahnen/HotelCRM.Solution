@@ -1,0 +1,29 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Guest
+
+<h1>Guest Details:</h1>
+<h3>Name: @Html.DisplayFor(model => model.Name)</h3>
+<h3>Hometown: @Html.DisplayFor(model => model.Hometown)</h3>
+<h3>Lifetime Nights: @Html.DisplayFor(model => model.LifetimeNights)</h3>
+<h3>VIP Tier: @Html.DisplayFor(model => model.VIPTier)</h3>
+<h1>Guest Contact Information:</h1>
+<h3>Phone: @Html.DisplayFor(model => model.Phone)</h3>
+<h3>Email: @Html.DisplayFor(model => model.Email)</h3>
+
+@if(@Model.Rooms.Count == 0)
+{
+  <h3>This guest has not yet stayed at your property.</h3>
+}
+else
+{
+  <h3>Stay History</h3>
+  <ul>
+  @foreach(var join in Model.Rooms)
+  {
+    <li>@join.Room.RoomNumber</li>
+  }
+  </ul>
+}

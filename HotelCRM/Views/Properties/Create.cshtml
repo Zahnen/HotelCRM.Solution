@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Property
+
+<h1>Add a new Property</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.LabelFor(model => model.Name)
+  @Html.TextBoxFor(model => model.Name)
+
+  @Html.LabelFor(model => model.Stars)
+  @Html.TextBoxFor(model => model.Stars)
+
+  @Html.LabelFor(model => model.Age)
+  @Html.TextBoxFor(model => model.Age)
+
+  @Html.LabelFor(model => model.Neighborhood)
+  @Html.TextBoxFor(model => model.Neighborhood)
+
+  <input type="submit" value="Add new property" class="btn btn-default" />
+}

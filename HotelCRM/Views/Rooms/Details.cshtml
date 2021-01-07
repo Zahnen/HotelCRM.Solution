@@ -6,6 +6,9 @@
 
 <h1>Room Details:</h1>
 <h3>Room @Html.DisplayFor(model => model.RoomNumber)</h3>
+<h3>Room Type: @Html.DisplayFor(model => model.RoomType)</h3>
+<h3>Maximum Number of Guests: @Html.DisplayFor(model => model.MaxOccupancy)</h3>
+
 
 @if(@Model.Guests.Count == 0)
 {
