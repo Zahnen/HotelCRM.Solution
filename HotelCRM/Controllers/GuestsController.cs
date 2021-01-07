@@ -23,7 +23,7 @@ namespace HotelCRM.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.RoomId = new SelectList(_db.Rooms, "RoomId", "Name");
+      ViewBag.RoomId = new SelectList(_db.Rooms, "RoomId", "RoomNumber");
       return View();
     }
 
@@ -63,6 +63,24 @@ namespace HotelCRM.Controllers
         _db.GuestRoom.Add(new GuestRoom() { RoomId = RoomId, GuestId = guest.GuestId });
       }
       _db.Entry(guest).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddRoom(int id)
+    {
+      var thisGuest = _db.Guests.FirstOrDefault(GuestsController => GuestsController.GuestId == id);
+      ViewBag.RoomId = new SelectList(_db.Rooms, "RoomId", "RoomNumber");
+      return View(thisGuest);
+    }
+
+    [HttpPost]
+    public ActionResult AddRoom(Guest guest, int RoomId)
+    {
+      if (RoomId != 0)
+      {
+        _db.GuestRoom.Add(new GuestRoom() { RoomId = RoomId, GuestId = guest.GuestId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }

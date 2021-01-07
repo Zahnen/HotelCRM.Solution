@@ -10,6 +10,21 @@
 <h3>Star Rating: @Html.DisplayFor(model => model.Stars)</h3>
 <h3>Year Built: @Html.DisplayFor(model => model.YearBuilt)</h3>
 
+@if(@Model.Rooms.Count == 0)
+{
+  <h3>This property does not have any rooms assigned to it.</h3>
+}
+else
+{
+  <h3>Rooms:</h3>
+  <ul>
+  @foreach(var join in Model.Rooms)
+  {
+    <li>@join.Room.RoomNumber</li>
+  }
+  </ul>
+}
+
 <nav class="navbar navbar-light">  
   <div class="container-fluid" id = "nav-background">  
     <ul class="nav navbar-nav">

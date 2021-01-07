@@ -23,6 +23,20 @@ else
   }
   </ul>
 }
+@if(@Model.Properties.Count == 0)
+{
+  <h3>This room is not assigned to a property.</h3>
+}
+else
+{
+  <h3>Property:</h3>
+  <ul>
+  @foreach(var join in Model.Properties)
+  {
+    <li>@join.Property.Name</li>
+  }
+  </ul>
+}
 
 <nav class="navbar navbar-light">  
   <div class="container-fluid" id = "nav-background">  
@@ -33,6 +47,9 @@ else
       <button type="button" class="btn btn-dark">
         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span><li>@Html.ActionLink("Delete Room", "Delete", new { id = Model.RoomId })</li>  
       </button>
+      <button type="button" class="btn btn-dark">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><li>@Html.ActionLink("Add a property", "AddProperty", new { id = Model.RoomId })</li>  
+      </button>  
     </ul>  
   </div>  
 </nav>

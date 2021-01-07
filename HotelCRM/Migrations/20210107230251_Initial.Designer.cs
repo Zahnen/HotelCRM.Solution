@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelCRM.Migrations
 {
     [DbContext(typeof(HotelCRMContext))]
-    [Migration("20210107210824_Initial")]
+    [Migration("20210107230251_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,24 @@ namespace HotelCRM.Migrations
                     b.ToTable("Rooms");
                 });
 
+            modelBuilder.Entity("HotelCRM.Models.RoomProperty", b =>
+                {
+                    b.Property<int>("RoomPropertyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("PropertyId");
+
+                    b.Property<int>("RoomId");
+
+                    b.HasKey("RoomPropertyId");
+
+                    b.HasIndex("PropertyId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomProperty");
+                });
+
             modelBuilder.Entity("HotelCRM.Models.GuestRoom", b =>
                 {
                     b.HasOne("HotelCRM.Models.Guest", "Guest")
@@ -114,8 +132,21 @@ namespace HotelCRM.Migrations
             modelBuilder.Entity("HotelCRM.Models.Room", b =>
                 {
                     b.HasOne("HotelCRM.Models.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("HotelCRM.Models.RoomProperty", b =>
+                {
+                    b.HasOne("HotelCRM.Models.Property", "Property")
                         .WithMany("Rooms")
                         .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("HotelCRM.Models.Room", "Room")
+                        .WithMany("Properties")
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

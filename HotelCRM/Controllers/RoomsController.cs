@@ -29,12 +29,16 @@ namespace HotelCRM.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Room room, int GuestId)
+    public ActionResult Create(Room room, int GuestId, int PropertyId)
     {
       _db.Rooms.Add(room);
       if (GuestId != 0)
       {
         _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId });
+      }
+      if (PropertyId != 0)
+      {
+        _db.RoomProperty.Add(new RoomProperty() { PropertyId = PropertyId, RoomId = room.RoomId });
       }
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -42,15 +46,11 @@ namespace HotelCRM.Controllers
 
     public ActionResult Details(int id)
     {
-      // var room = _db.Rooms.id;
-      // ViewBag.Property = new SelectList(_db.Properties.propertyId.Name, "PropertyId", "Name");
-
-      // var thisRoom = _db.Rooms.FirstOrDefault(room => room.RoomId == id);
-      // var thisProperty = _db.Properties.FirstOrDefault(property => property.PropertyId == thisRoom.PropertyId);
-      // var propertyName = thisProperty.Name;
       var thisRoom = _db.Rooms
-        .Include(room => room.Guests)
+        .Include(Room => Room.Guests)
         .ThenInclude(join => join.Guest)
+        .Include(Room => Room.Properties)
+        .ThenInclude(join => join.Property)
         .FirstOrDefault(room => room.RoomId == id);
       return View(thisRoom);
     }
@@ -64,13 +64,35 @@ namespace HotelCRM.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Room room, int GuestId)
+    public ActionResult Edit(Room room, int GuestId, int PropertyId)
     {
       if (GuestId != 0)
       {
         _db.GuestRoom.Add(new GuestRoom() { GuestId = GuestId, RoomId = room.RoomId });
       }
+      if (PropertyId != 0)
+      {
+        _db.RoomProperty.Add(new RoomProperty() { PropertyId = PropertyId, RoomId = room.RoomId });
+      }
       _db.Entry(room).State = EntityState.Modified;
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    public ActionResult AddProperty(int id)
+    {
+      var thisRoom = _db.Rooms.FirstOrDefault(RoomsController => RoomsController.RoomId == id);
+      ViewBag.PropertyId = new SelectList(_db.Properties, "PropertyId", "Name");
+      return View(thisRoom);
+    }
+
+    [HttpPost]
+    public ActionResult AddProperty(Room room, int PropertyId)
+    {
+      if (PropertyId != 0)
+      {
+        _db.RoomProperty.Add(new RoomProperty() { PropertyId = PropertyId, RoomId = room.RoomId });
+      }
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
@@ -91,3 +113,10 @@ namespace HotelCRM.Controllers
     }
   }
 }
+
+      // var room = _db.Rooms.id;
+      // ViewBag.Property = new SelectList(_db.Properties.propertyId.Name, "PropertyId", "Name");
+
+      // var thisRoom = _db.Rooms.FirstOrDefault(room => room.RoomId == id);
+      // var thisProperty = _db.Properties.FirstOrDefault(property => property.PropertyId == thisRoom.PropertyId);
+      // var propertyName = thisProperty.Name;

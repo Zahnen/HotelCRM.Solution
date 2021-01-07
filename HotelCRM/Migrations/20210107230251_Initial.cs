@@ -90,6 +90,32 @@ namespace HotelCRM.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "RoomProperty",
+                columns: table => new
+                {
+                    RoomPropertyId = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    RoomId = table.Column<int>(nullable: false),
+                    PropertyId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RoomProperty", x => x.RoomPropertyId);
+                    table.ForeignKey(
+                        name: "FK_RoomProperty_Properties_PropertyId",
+                        column: x => x.PropertyId,
+                        principalTable: "Properties",
+                        principalColumn: "PropertyId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RoomProperty_Rooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "Rooms",
+                        principalColumn: "RoomId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_GuestRoom_GuestId",
                 table: "GuestRoom",
@@ -98,6 +124,16 @@ namespace HotelCRM.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_GuestRoom_RoomId",
                 table: "GuestRoom",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomProperty_PropertyId",
+                table: "RoomProperty",
+                column: "PropertyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomProperty_RoomId",
+                table: "RoomProperty",
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
@@ -110,6 +146,9 @@ namespace HotelCRM.Migrations
         {
             migrationBuilder.DropTable(
                 name: "GuestRoom");
+
+            migrationBuilder.DropTable(
+                name: "RoomProperty");
 
             migrationBuilder.DropTable(
                 name: "Guests");

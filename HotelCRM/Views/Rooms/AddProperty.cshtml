@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+@model HotelCRM.Models.Room
+
+<h1>Add a Property</h1>
+
+<h3>Add a property this room is located: @Html.DisplayFor(model => model.RoomNumber)</h3>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.RoomId)
+
+  @Html.Label("Select Property")
+  @Html.DropDownList("PropertyId")
+
+  <input type="submit" value="Save" />
+}

@@ -7,6 +7,7 @@ namespace HotelCRM.Models
     public Room()
     {
       this.Guests = new HashSet<GuestRoom>();
+      this.Properties = new HashSet<RoomProperty>();
     }
 
     public int RoomId { get; set; }
@@ -17,5 +18,6 @@ namespace HotelCRM.Models
     public Property Property { get; set; }
 
     public ICollection<GuestRoom> Guests { get; set; }
+    public ICollection<RoomProperty> Properties { get; set; }
   }
 }
