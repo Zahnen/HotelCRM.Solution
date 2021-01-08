@@ -2,8 +2,8 @@
   text-align: center;
 }
 body {
-  background: #023047;
+  background: #e9ecef;
 }
-h1, h3, p, li {
-  color: aliceblue;
+.navglyph {
+  background-color: #023e8a;
 }
