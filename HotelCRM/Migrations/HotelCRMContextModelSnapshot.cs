@@ -91,8 +91,6 @@ namespace HotelCRM.Migrations
 
                     b.HasKey("RoomId");
 
-                    b.HasIndex("PropertyId");
-
                     b.ToTable("Rooms");
                 });
 
@@ -124,14 +122,6 @@ namespace HotelCRM.Migrations
                     b.HasOne("HotelCRM.Models.Room", "Room")
                         .WithMany("Guests")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("HotelCRM.Models.Room", b =>
-                {
-                    b.HasOne("HotelCRM.Models.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -56,12 +56,6 @@ namespace HotelCRM.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rooms", x => x.RoomId);
-                    table.ForeignKey(
-                        name: "FK_Rooms_Properties_PropertyId",
-                        column: x => x.PropertyId,
-                        principalTable: "Properties",
-                        principalColumn: "PropertyId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,11 +129,6 @@ namespace HotelCRM.Migrations
                 name: "IX_RoomProperty_RoomId",
                 table: "RoomProperty",
                 column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Rooms_PropertyId",
-                table: "Rooms",
-                column: "PropertyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -154,10 +143,10 @@ namespace HotelCRM.Migrations
                 name: "Guests");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "Properties");
 
             migrationBuilder.DropTable(
-                name: "Properties");
+                name: "Rooms");
         }
     }
 }

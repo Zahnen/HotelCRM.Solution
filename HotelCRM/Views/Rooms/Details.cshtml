@@ -4,39 +4,46 @@
 
 @model HotelCRM.Models.Room
 
-<h1>Room Details:</h1>
-<h3>Room @Html.DisplayFor(model => model.RoomNumber)</h3>
-<h3>Room Type: @Html.DisplayFor(model => model.RoomType)</h3>
-<h3>Maximum Number of Guests: @Html.DisplayFor(model => model.MaxOccupancy)</h3>
-
-@if(@Model.Guests.Count == 0)
-{
-  <p>No guests have stayed in this room</p>
-}
-else
-{
-  <h3>Guests who have stayed in this room:</h3>
-  <ul>
-  @foreach(var join in Model.Guests)
-  {
-    <li>@join.Guest.Name</li>
-  }
-  </ul>
-}
-@if(@Model.Properties.Count == 0)
-{
-  <h3>This room is not assigned to a property.</h3>
-}
-else
-{
-  <h3>Property:</h3>
-  <ul>
-  @foreach(var join in Model.Properties)
-  {
-    <li>@join.Property.Name</li>
-  }
-  </ul>
-}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Room Details</h1>
+        <h3>Room @Html.DisplayFor(model => model.RoomNumber)</h3>
+        <h3>Room Type: @Html.DisplayFor(model => model.RoomType)</h3>
+        <h3>Maximum Number of Guests: @Html.DisplayFor(model => model.MaxOccupancy)</h3>
+    </div>
+    <div class="col-sm-6">
+      @if(@Model.Guests.Count == 0)
+      {
+        <p>No guests have stayed in this room</p>
+      }
+      else
+      {
+        <h3>Guests who have stayed in this room:</h3>
+        <ul>
+        @foreach(var join in Model.Guests)
+        {
+          <li>@join.Guest.Name</li>
+        }
+        </ul>
+      }
+      @if(@Model.Properties.Count == 0)
+      {
+        <h3>This room is not assigned to a property.</h3>
+      }
+      else
+      {
+        <h3>Property:</h3>
+        <ul>
+        @foreach(var join in Model.Properties)
+        {
+          <li>@join.Property.Name</li>
+        }
+        </ul>
+      }
+    </div>
+  </div>
+</div>
 
 <nav class="navbar navbar-light">  
   <div class="container-fluid" id = "nav-background">  

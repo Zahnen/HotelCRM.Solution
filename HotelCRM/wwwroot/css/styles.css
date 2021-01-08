@@ -1,0 +1,9 @@
+.centeredData {
+  text-align: center;
+}
+body {
+  background: #023047;
+}
+h1, h3, p, li {
+  color: aliceblue;
+}

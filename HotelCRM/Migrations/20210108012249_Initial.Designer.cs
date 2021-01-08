@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelCRM.Migrations
 {
     [DbContext(typeof(HotelCRMContext))]
-    [Migration("20210107230251_Initial")]
+    [Migration("20210108012249_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,8 +93,6 @@ namespace HotelCRM.Migrations
 
                     b.HasKey("RoomId");
 
-                    b.HasIndex("PropertyId");
-
                     b.ToTable("Rooms");
                 });
 
@@ -126,14 +124,6 @@ namespace HotelCRM.Migrations
                     b.HasOne("HotelCRM.Models.Room", "Room")
                         .WithMany("Guests")
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("HotelCRM.Models.Room", b =>
-                {
-                    b.HasOne("HotelCRM.Models.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
